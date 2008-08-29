@@ -1,13 +1,13 @@
 <?php
   include_once('MCAPI.class.php');
-  #$username = 'foxycart';
-  #$password = 'bNzamino3';
 
   (isset($_COOKIE['chimpunlock']) and
    list($username, $password) = explode('|', $_COOKIE['chimpunlock'])) or
    (isset($_POST['username']) and $username = $_POST['username'] and
-   isset($_POST['password']) and $password = $_POST['password']) or
+   isset($_POST['pass']) and $password = $_POST['pass']) or
    list($username, $password) = array(null, null);
+
+  #die(serialize(array($username, $password)));
 
   $mc = new MCAPI($username, $password);
 
@@ -22,7 +22,7 @@
   }
   else {
     setcookie('chimpunlock', "$username|$password");
-    header('Location: '.$_SERVER['PHP_SELF']) and die();
+    #header('Location: '.$_SERVER['PHP_SELF']) and die();
   }
 
   $mc->closeOneOhSecurityHole($username, $password) or
